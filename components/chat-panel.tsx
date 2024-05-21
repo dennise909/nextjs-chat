@@ -37,13 +37,13 @@ export function ChatPanel({
   const exampleMessages = [
     {
       heading: 'What are the',
-      subheading: 'trending memecoins today?',
-      message: `What are the trending memecoins today?`
+      subheading: 'trending haircuts?',
+      message: `What are the trending haircuts?`
     },
     {
-      heading: 'What is the price of',
-      subheading: '$DOGE right now?',
-      message: 'What is the price of $DOGE right now?'
+      heading: 'What is the list price of',
+      subheading: 'the services at the salon ?',
+      message: 'What is the list price of the services at the salon?'
     },
     {
       heading: 'I would like to buy',
@@ -54,6 +54,11 @@ export function ChatPanel({
       heading: 'What are some',
       subheading: `recent events about $DOGE?`,
       message: `What are some recent events about $DOGE?`
+    },
+    {
+      heading: 'What are some',
+      subheading: `recent events about haircuts?`,
+      message: `What are some recent events about haircuts?`
     }
   ]
 
@@ -137,3 +142,4 @@ export function ChatPanel({
     </div>
   )
 }
+
