@@ -36,6 +36,157 @@ import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
 
+const services = {
+  "services": [
+    {
+      "name": "Quick Cut / Tips Cut",
+      "price": "€30",
+      "duration": "45 mins",
+      "characteristics": "A fast trim focused on the tips of the hair, maintaining the current hairstyle."
+    },
+    {
+      "name": "Short Cut + Wash & Style",
+      "price": "€40",
+      "duration": "1 hour",
+      "characteristics": "Includes a wash, haircut for short hair, and a professional styling session."
+    },
+    {
+      "name": "Long Cut + Wash & Dry",
+      "price": "€50",
+      "duration": "1 hour",
+      "characteristics": "Includes a wash, haircut for long hair, and a blow-dry finish."
+    },
+    {
+      "name": "Balayage Short",
+      "price": "€150",
+      "duration": "3 hours",
+      "characteristics": "Balayage technique for short hair, providing a natural, sun-kissed look."
+    },
+    {
+      "name": "Balayage Long",
+      "price": "€175",
+      "duration": "3 hours",
+      "characteristics": "Balayage technique for long hair, offering a seamless blend of highlights."
+    },
+    {
+      "name": "Balayage Extra",
+      "price": "From €200",
+      "duration": "4 hours",
+      "characteristics": "Extended balayage service for extra detail and customization."
+    },
+    {
+      "name": "Highlight Half",
+      "price": "€165",
+      "duration": "3 hours",
+      "characteristics": "Partial highlights for a subtle enhancement and dimension."
+    },
+    {
+      "name": "Highlight Full",
+      "price": "From €200",
+      "duration": "4 hours",
+      "characteristics": "Full head highlights for a dramatic transformation."
+    },
+    {
+      "name": "Highlights Contour",
+      "price": "From €120",
+      "duration": "2 hours",
+      "characteristics": "Face-framing highlights to enhance facial features."
+    },
+    {
+      "name": "Shave & Bleach",
+      "price": "€120",
+      "duration": "2 hours",
+      "characteristics": "Combines a professional shave with a full bleach treatment."
+    },
+    {
+      "name": "Total Bleach Short",
+      "price": "€150",
+      "duration": "3 hours",
+      "characteristics": "Complete bleach treatment for short hair."
+    },
+    {
+      "name": "Total Bleach Medium",
+      "price": "€175",
+      "duration": "3 hours 30 mins",
+      "characteristics": "Complete bleach treatment for medium-length hair."
+    },
+    {
+      "name": "Total Bleach Long",
+      "price": "From €200",
+      "duration": "4 hours",
+      "characteristics": "Complete bleach treatment for long hair."
+    },
+    {
+      "name": "Root Bleach Touch-up",
+      "price": "€140",
+      "duration": "3 hours",
+      "characteristics": "Touch-up service focusing on bleaching the roots."
+    },
+    {
+      "name": "Bleach Re-Do",
+      "price": "From €170",
+      "duration": "4 hours",
+      "characteristics": "Correctional bleach service for previous bleach jobs."
+    },
+    {
+      "name": "Color Block",
+      "price": "From €140",
+      "duration": "2 hours 30 mins",
+      "characteristics": "Bold color blocks for a striking and modern look."
+    },
+    {
+      "name": "Toner Refresh",
+      "price": "€60",
+      "duration": "1 hour",
+      "characteristics": "Refreshes color tones and neutralizes brassiness."
+    },
+    {
+      "name": "Hair Color",
+      "price": "From €110",
+      "duration": "2 hours",
+      "characteristics": "Full hair coloring service with a wide range of color options."
+    },
+    {
+      "name": "Color Design",
+      "price": "From €115",
+      "duration": "2 hours",
+      "characteristics": "Customized color design for unique and personalized looks."
+    },
+    {
+      "name": "Color Root Touch-Up",
+      "price": "€85",
+      "duration": "1 hour 30 mins",
+      "characteristics": "Touch-up service focusing on coloring the roots."
+    },
+    {
+      "name": "Styling",
+      "price": "€40",
+      "duration": "15 mins",
+      "characteristics": "Professional styling session for various occasions."
+    },
+    {
+      "name": "Olaplex №1 & №2",
+      "price": "€50",
+      "duration": "15 mins",
+      "characteristics": "Bond-repair treatment using Olaplex products."
+    },
+    {
+      "name": "General Consultation",
+      "price": "€0",
+      "duration": "15 mins",
+      "characteristics": "Free consultation to discuss hair goals and services."
+    },
+    {
+      "name": "Bleach test",
+      "price": "€0",
+      "duration": "15 mins",
+      "characteristics": "Test to check hair compatibility with bleach."
+    }
+  ]
+}
+
+
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
 })
@@ -104,9 +255,8 @@ async function confirmPurchase(symbol: string, price: number, amount: number) {
         {
           id: nanoid(),
           role: 'system',
-          content: `[User has purchased ${amount} shares of ${symbol} at ${price}. Total cost = ${
-            amount * price
-          }]`
+          content: `[User has purchased ${amount} shares of ${symbol} at ${price}. Total cost = ${amount * price
+            }]`
         }
       ]
     })
@@ -142,16 +292,19 @@ async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode
 
   const ui = render({
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-4o',
     provider: openai,
     initial: <SpinnerMessage />,
     messages: [
       {
         role: 'system',
-        content: `\
-You are a hairdresser bot and you can help users schedule appointements with the clients, step by step.
-You and the user can discuss available time slots and the user can adjust the time they want to schedule the appointment.
-`
+        content: `
+        You are a helpful hairdresser bot designed to assist users in scheduling appointments and providing information about various hairdressing services. Below is a list of services you offer in JSON format. Use this information to respond to users' questions and help them schedule appointments.
+        
+        Services: ${JSON.stringify(services, null, 2)}
+        
+        When responding to users, refer to the services above and provide detailed information based on their questions. Assist them in scheduling appointments and offer suggestions tailored to their needs.
+        `
       },
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
