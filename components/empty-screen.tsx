@@ -3,6 +3,7 @@ import { UseChatHelpers } from 'ai/react'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/external-link'
 import { IconArrowRight } from '@/components/ui/icons'
+import GoogleCalendar from '@/components/calendar/GoogleCalendarFreeBusy'
 
 const exampleMessages = [
   {
@@ -48,6 +49,8 @@ export function EmptyScreen() {
           as they happen.
         </p>
       </div>
+       <GoogleCalendar/>
     </div>
+   
   )
 }

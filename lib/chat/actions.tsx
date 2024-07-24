@@ -35,157 +35,170 @@ import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
+import { listAvailableSlots } from '@/components/calendar/GoogleCalendarFreeBusy';
 
 const services = {
-  "services": [
-    {
-      "name": "Quick Cut / Tips Cut",
-      "price": "€30",
-      "duration": "45 mins",
-      "characteristics": "A fast trim focused on the tips of the hair, maintaining the current hairstyle."
-    },
-    {
-      "name": "Short Cut + Wash & Style",
-      "price": "€40",
-      "duration": "1 hour",
-      "characteristics": "Includes a wash, haircut for short hair, and a professional styling session."
-    },
-    {
-      "name": "Long Cut + Wash & Dry",
-      "price": "€50",
-      "duration": "1 hour",
-      "characteristics": "Includes a wash, haircut for long hair, and a blow-dry finish."
-    },
-    {
-      "name": "Balayage Short",
-      "price": "€150",
-      "duration": "3 hours",
-      "characteristics": "Balayage technique for short hair, providing a natural, sun-kissed look."
-    },
-    {
-      "name": "Balayage Long",
-      "price": "€175",
-      "duration": "3 hours",
-      "characteristics": "Balayage technique for long hair, offering a seamless blend of highlights."
-    },
-    {
-      "name": "Balayage Extra",
-      "price": "From €200",
-      "duration": "4 hours",
-      "characteristics": "Extended balayage service for extra detail and customization."
-    },
-    {
-      "name": "Highlight Half",
-      "price": "€165",
-      "duration": "3 hours",
-      "characteristics": "Partial highlights for a subtle enhancement and dimension."
-    },
-    {
-      "name": "Highlight Full",
-      "price": "From €200",
-      "duration": "4 hours",
-      "characteristics": "Full head highlights for a dramatic transformation."
-    },
-    {
-      "name": "Highlights Contour",
-      "price": "From €120",
-      "duration": "2 hours",
-      "characteristics": "Face-framing highlights to enhance facial features."
-    },
-    {
-      "name": "Shave & Bleach",
-      "price": "€120",
-      "duration": "2 hours",
-      "characteristics": "Combines a professional shave with a full bleach treatment."
-    },
-    {
-      "name": "Total Bleach Short",
-      "price": "€150",
-      "duration": "3 hours",
-      "characteristics": "Complete bleach treatment for short hair."
-    },
-    {
-      "name": "Total Bleach Medium",
-      "price": "€175",
-      "duration": "3 hours 30 mins",
-      "characteristics": "Complete bleach treatment for medium-length hair."
-    },
-    {
-      "name": "Total Bleach Long",
-      "price": "From €200",
-      "duration": "4 hours",
-      "characteristics": "Complete bleach treatment for long hair."
-    },
-    {
-      "name": "Root Bleach Touch-up",
-      "price": "€140",
-      "duration": "3 hours",
-      "characteristics": "Touch-up service focusing on bleaching the roots."
-    },
-    {
-      "name": "Bleach Re-Do",
-      "price": "From €170",
-      "duration": "4 hours",
-      "characteristics": "Correctional bleach service for previous bleach jobs."
-    },
-    {
-      "name": "Color Block",
-      "price": "From €140",
-      "duration": "2 hours 30 mins",
-      "characteristics": "Bold color blocks for a striking and modern look."
-    },
-    {
-      "name": "Toner Refresh",
-      "price": "€60",
-      "duration": "1 hour",
-      "characteristics": "Refreshes color tones and neutralizes brassiness."
-    },
-    {
-      "name": "Hair Color",
-      "price": "From €110",
-      "duration": "2 hours",
-      "characteristics": "Full hair coloring service with a wide range of color options."
-    },
-    {
-      "name": "Color Design",
-      "price": "From €115",
-      "duration": "2 hours",
-      "characteristics": "Customized color design for unique and personalized looks."
-    },
-    {
-      "name": "Color Root Touch-Up",
-      "price": "€85",
-      "duration": "1 hour 30 mins",
-      "characteristics": "Touch-up service focusing on coloring the roots."
-    },
-    {
-      "name": "Styling",
-      "price": "€40",
-      "duration": "15 mins",
-      "characteristics": "Professional styling session for various occasions."
-    },
-    {
-      "name": "Olaplex №1 & №2",
-      "price": "€50",
-      "duration": "15 mins",
-      "characteristics": "Bond-repair treatment using Olaplex products."
-    },
-    {
-      "name": "General Consultation",
-      "price": "€0",
-      "duration": "15 mins",
-      "characteristics": "Free consultation to discuss hair goals and services."
-    },
-    {
-      "name": "Bleach test",
-      "price": "€0",
-      "duration": "15 mins",
-      "characteristics": "Test to check hair compatibility with bleach."
-    }
-  ]
+  "categories": {
+    "Haircuts": [
+      {
+        "name": "Quick Cut / Tips Cut",
+        "price": "€30",
+        "duration": "45 mins",
+        "description": "A fast trim focused on the tips of the hair, maintaining the current hairstyle."
+      },
+      {
+        "name": "Short Cut + Wash & Style",
+        "price": "€40",
+        "duration": "1 hour",
+        "description": "Includes a wash, haircut for short hair, and a professional styling session."
+      },
+      {
+        "name": "Long Cut + Wash & Dry",
+        "price": "€50",
+        "duration": "1 hour",
+        "description": "Includes a wash, haircut for long hair, and a blow-dry finish."
+      }
+    ],
+    "Balayage": [
+      {
+        "name": "Balayage Short",
+        "price": "€150",
+        "duration": "3 hours",
+        "description": "Balayage technique for short hair, providing a natural, sun-kissed look."
+      },
+      {
+        "name": "Balayage Long",
+        "price": "€175",
+        "duration": "3 hours",
+        "description": "Balayage technique for long hair, offering a seamless blend of highlights."
+      },
+      {
+        "name": "Balayage Extra",
+        "price": "From €200",
+        "duration": "4 hours",
+        "description": "Extended balayage service for extra detail and customization."
+      }
+    ],
+    "Highlights": [
+      {
+        "name": "Highlight Half",
+        "price": "€165",
+        "duration": "3 hours",
+        "description": "Partial highlights for a subtle enhancement and dimension."
+      },
+      {
+        "name": "Highlight Full",
+        "price": "From €200",
+        "duration": "4 hours",
+        "description": "Full head highlights for a dramatic transformation."
+      },
+      {
+        "name": "Highlights Contour",
+        "price": "From €120",
+        "duration": "2 hours",
+        "description": "Face-framing highlights to enhance facial features."
+      }
+    ],
+    "Bleaching": [
+      {
+        "name": "Shave & Bleach",
+        "price": "€120",
+        "duration": "2 hours",
+        "description": "Combines a professional shave with a full bleach treatment."
+      },
+      {
+        "name": "Total Bleach Short",
+        "price": "€150",
+        "duration": "3 hours",
+        "description": "Complete bleach treatment for short hair."
+      },
+      {
+        "name": "Total Bleach Medium",
+        "price": "€175",
+        "duration": "3 hours 30 mins",
+        "description": "Complete bleach treatment for medium-length hair."
+      },
+      {
+        "name": "Total Bleach Long",
+        "price": "From €200",
+        "duration": "4 hours",
+        "description": "Complete bleach treatment for long hair."
+      },
+      {
+        "name": "Root Bleach Touch-up",
+        "price": "€140",
+        "duration": "3 hours",
+        "description": "Touch-up service focusing on bleaching the roots."
+      },
+      {
+        "name": "Bleach Re-Do",
+        "price": "From €170",
+        "duration": "4 hours",
+        "description": "Correctional bleach service for previous bleach jobs."
+      }
+    ],
+    "Coloring": [
+      {
+        "name": "Color Block",
+        "price": "From €140",
+        "duration": "2 hours 30 mins",
+        "description": "Bold color blocks for a striking and modern look."
+      },
+      {
+        "name": "Toner Refresh",
+        "price": "€60",
+        "duration": "1 hour",
+        "description": "Refreshes color tones and neutralizes brassiness."
+      },
+      {
+        "name": "Hair Color",
+        "price": "From €110",
+        "duration": "2 hours",
+        "description": "Full hair coloring service with a wide range of color options."
+      },
+      {
+        "name": "Color Design",
+        "price": "From €115",
+        "duration": "2 hours",
+        "description": "Customized color design for unique and personalized looks."
+      },
+      {
+        "name": "Color Root Touch-Up",
+        "price": "€85",
+        "duration": "1 hour 30 mins",
+        "description": "Touch-up service focusing on coloring the roots."
+      }
+    ],
+    "Treatments": [
+      {
+        "name": "Styling",
+        "price": "€40",
+        "duration": "15 mins",
+        "description": "Professional styling session for various occasions."
+      },
+      {
+        "name": "Olaplex №1 & №2",
+        "price": "€50",
+        "duration": "15 mins",
+        "description": "Bond-repair treatment using Olaplex products."
+      }
+    ],
+    "Consultations": [
+      {
+        "name": "General Consultation",
+        "price": "€0",
+        "duration": "15 mins",
+        "description": "Free consultation to discuss hair goals and services."
+      },
+      {
+        "name": "Bleach test",
+        "price": "€0",
+        "duration": "15 mins",
+        "description": "Test to check hair compatibility with bleach."
+      }
+    ]
+  }
 }
-
-
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
@@ -304,6 +317,10 @@ async function submitUserMessage(content: string) {
         Services: ${JSON.stringify(services, null, 2)}
         
         When responding to users, refer to the services above and provide detailed information based on their questions. Assist them in scheduling appointments and offer suggestions tailored to their needs.
+        
+        When offering the available times use the Available hours list of open times, ask if they prefer the time during the morning or evening and just show times from 10:30am to 19:00pm 
+        
+        Avaialble Hours: ${listAvailableSlots}
         `
       },
       ...aiState.get().messages.map((message: any) => ({

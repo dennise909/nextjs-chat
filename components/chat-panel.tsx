@@ -36,29 +36,9 @@ export function ChatPanel({
 
   const exampleMessages = [
     {
-      heading: 'What are the',
-      subheading: 'trending haircuts?',
-      message: `What are the trending haircuts?`
-    },
-    {
-      heading: 'What is the list price of',
-      subheading: 'the services at the salon ?',
-      message: 'What is the list price of the services at the salon?'
-    },
-    {
-      heading: 'I would like to buy',
-      subheading: '42 $DOGE',
-      message: `I would like to buy 42 $DOGE`
-    },
-    {
-      heading: 'What are some',
-      subheading: `recent events about $DOGE?`,
-      message: `What are some recent events about $DOGE?`
-    },
-    {
-      heading: 'What are some',
-      subheading: `recent events about haircuts?`,
-      message: `What are some recent events about haircuts?`
+      heading: 'Want to book an appointment?',
+      subheading: 'Ready to make some magic happen!',
+      message: `Want to book an appointment?`
     }
   ]
 
