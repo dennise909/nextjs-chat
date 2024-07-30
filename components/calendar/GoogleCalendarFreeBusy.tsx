@@ -41,7 +41,7 @@ const GoogleCalendar: React.FC = () => {
 
   const listAvailableSlots = () => {
     const timeMin = new Date().toISOString();
-    const timeMax = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(); // One week from now
+    const timeMax = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(); // One week from now
 
     gapi.client.calendar.freebusy
       .query({
@@ -90,6 +90,7 @@ const GoogleCalendar: React.FC = () => {
   };
   
   console.log(JSON.stringify(availableSlots, null, 2))
+
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -102,19 +103,6 @@ const GoogleCalendar: React.FC = () => {
     return new Date(dateString).toLocaleString('en-US', options);
   };
   return (
-    // <div>
-    //   {isSignedIn ? (
-    //     <button onClick={handleSignoutClick}>Sign Out</button>
-    //   ) : (
-    //     <button onClick={handleAuthClick}>Authorize</button>
-    //   )}
-    //   {isSignedIn && (
-    //     <div>
-    //       <button onClick={listAvailableSlots}>List Available Slots</button>
-    //       {/* {JSON.stringify(availableSlots, null, 2)} */}
-    //     </div>
-    //   )}
-    // </div>
     <div>
     {isSignedIn ? (
       <button onClick={handleSignoutClick}>Sign Out</button>
@@ -139,3 +127,4 @@ const GoogleCalendar: React.FC = () => {
 };
 
 export default GoogleCalendar;
+
