@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
@@ -105,13 +105,13 @@ const GoogleCalendar: React.FC = () => {
   return (
     <div>
     {isSignedIn ? (
-      <button onClick={handleSignoutClick}>Sign Out</button>
+      <button onClick={handleSignoutClick}></button>
     ) : (
-      <button onClick={handleAuthClick}>Authorize</button>
+      <button onClick={handleAuthClick}></button>
     )}
     {isSignedIn && (
       <div>
-        <button onClick={listAvailableSlots}>List Available Slots</button>
+        {/* <button onClick={listAvailableSlots}>List Available Slots</button> */}
         <div>
           {availableSlots.map((slot, index) => (
             <div key={index}>
