@@ -105,13 +105,13 @@ const GoogleCalendar: React.FC = () => {
   return (
     <div>
     {isSignedIn ? (
-      <button onClick={handleSignoutClick}></button>
+      <button onClick={handleSignoutClick}>Sign out</button>
     ) : (
-      <button onClick={handleAuthClick}></button>
+      <button onClick={handleAuthClick}>Auth click</button>
     )}
     {isSignedIn && (
       <div>
-        {/* <button onClick={listAvailableSlots}>List Available Slots</button> */}
+        { <button onClick={listAvailableSlots}>List Available Slots</button>}
         <div>
           {availableSlots.map((slot, index) => (
             <div key={index}>

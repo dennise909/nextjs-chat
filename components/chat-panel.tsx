@@ -36,27 +36,33 @@ export function ChatPanel({
   const exampleMessages = [
     {
       heading: 'Book an appointment',
-      message: `Want to book an appointment?`
+      message: `Want to book an appointment?`,
+      icon: "📅"
     },
     {
       heading: 'Cancel or reschedule',
-      message: `Want to book an appointment?`
+      message: `Want to cancel or reschedule the appointment?`,
+      icon: "🔄"
     },
     {
       heading: 'Hair diagnose',
-      message: `Want to book an appointment?`
+      message: `What is the current status of your hair?`,
+      icon: "🧑‍⚕️"
     },
     {
       heading: 'Style consultation',
-      message: `Want to book an appointment?`
+      message: `Which haitsryle are you looking for?`,
+      icon: "💇‍♀️"
     },
     {
       heading: 'Follow up treatment advice',
-      message: `Want to book an appointment?`
+      message: `Do you need further help with your past service?`,
+      icon: "📝"
     },
     {
       heading: 'Give us feedback',
-      message: `Want to book an appointment?`
+      message: `Do you have any feedback for us?`,
+      icon: "📣"
     }
   ];
   return (
@@ -80,9 +86,9 @@ export function ChatPanel({
                       display: <UserMessage>{example.message}</UserMessage>,
                     },
                   ]);
-  
+
                   const responseMessage = await submitUserMessage(example.message);
-  
+
                   setMessages((currentMessages) => [
                     ...currentMessages,
                     responseMessage,
@@ -90,7 +96,7 @@ export function ChatPanel({
                 }}
               >
                 {/* Icon */}
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -105,7 +111,9 @@ export function ChatPanel({
                     d="M12.455 4.105a1 1 0 0 0-.91 0L1.987 8.982 1.077 7.2l9.56-4.877a3 3 0 0 1 2.726 0l9.56 4.877A1.98 1.98 0 0 1 24 9.22V15a1 1 0 1 1-2 0v-3.784l-2.033.995v4.094a3 3 0 0 1-1.578 2.642l-4.967 2.673a3 3 0 0 1-2.844 0l-4.967-2.673a3 3 0 0 1-1.578-2.642v-4.094l-2.927-1.433C-.374 10.053-.39 7.949 1.077 7.2l.91 1.782 9.573 4.689a1 1 0 0 0 .88 0L22 8.989v-.014zM6.033 13.19v3.114a1 1 0 0 0 .526.88l4.967 2.674a1 1 0 0 0 .948 0l4.967-2.673a1 1 0 0 0 .526-.88V13.19l-4.647 2.276a3 3 0 0 1-2.64 0z"
                     clipRule="evenodd"
                   ></path>
-                </svg>
+                </svg> */}
+                <span className="text-3xl">{example.icon}</span>
+                {/* Text */}
                 <div className="line-clamp-3 max-w-full text-balance text-gray-600 dark:text-gray-500 break-word text-center">
                   {example.heading}
                 </div>
@@ -115,7 +123,7 @@ export function ChatPanel({
               </div>
             ))}
         </div>
-  
+
         {messages?.length >= 2 ? (
           <div className="flex h-12 items-center justify-center">
             <div className="flex space-x-2">
@@ -144,7 +152,7 @@ export function ChatPanel({
             </div>
           </div>
         ) : null}
-  
+
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
           <PromptForm input={input} setInput={setInput} />
           <FooterText className="hidden sm:block" />
