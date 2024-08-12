@@ -214,7 +214,7 @@ async function submitUserMessage(content: string) {
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
-  console.log("hours", listAvailableSlots)
+  // console.log("hours", listAvailableSlots)
   const ui = render({
     model: 'gpt-4o',
     provider: openai,
@@ -309,7 +309,7 @@ export const AI = createAI<AIState, UIState>({
       if (aiState) {
         const uiState =
 
- getUIStateFromAIState(aiState)
+          getUIStateFromAIState(aiState)
         return uiState
       }
     } else {

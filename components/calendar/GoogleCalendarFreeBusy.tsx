@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const API_KEY = process.env.GOOGLE_API_KEY
 const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
@@ -58,8 +58,10 @@ const GoogleCalendar: React.FC = () => {
         setAvailableSlots(availableSlots);
       });
 
-    
+
   };
+
+  // Remove then so its just shared as a sync function
 
   const findAvailableSlots = (busyTimes: { start: string; end: string }[], start: string, end: string) => {
     let slots: { start: string; end: string }[] = [];
@@ -88,8 +90,9 @@ const GoogleCalendar: React.FC = () => {
 
     return slots;
   };
-  
+
   console.log(JSON.stringify(availableSlots, null, 2))
+  // localStorage.setItem('google-slots', JSON.stringify(availableSlots));
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -104,25 +107,25 @@ const GoogleCalendar: React.FC = () => {
   };
   return (
     <div>
-    {isSignedIn ? (
-      <button onClick={handleSignoutClick}>Sign out</button>
-    ) : (
-      <button onClick={handleAuthClick}>Auth click</button>
-    )}
-    {isSignedIn && (
-      <div>
-        { <button onClick={listAvailableSlots}>List Available Slots</button>}
+      {isSignedIn ? (
+        <button onClick={handleSignoutClick}>sign in</button>
+      ) : (
+        <button onClick={handleAuthClick}>Auth check</button>
+      )}
+      {isSignedIn && (
         <div>
-          {availableSlots.map((slot, index) => (
-            <div key={index}>
-              <p>Start: {formatDate(slot.start)}</p>
-              <p>End: {formatDate(slot.end)}</p>
-            </div>
-          ))}
+          {<button onClick={listAvailableSlots}>List Available Slots</button>}}
+          <div>
+            {availableSlots.map((slot, index) => (
+              <div key={index}>
+                <p>Start: {formatDate(slot.start)}</p>
+                <p>End: {formatDate(slot.end)}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
-  </div>
+      )}
+    </div>
   );
 };
 
