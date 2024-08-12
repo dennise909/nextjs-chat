@@ -114,7 +114,7 @@ const GoogleCalendar: React.FC = () => {
       )}
       {isSignedIn && (
         <div>
-          {<button onClick={listAvailableSlots}>List Available Slots</button>}}
+          {<button onClick={listAvailableSlots}>List Available Slots</button>}
           <div>
             {availableSlots.map((slot, index) => (
               <div key={index}>
