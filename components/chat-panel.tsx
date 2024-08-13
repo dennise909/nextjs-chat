@@ -38,32 +38,32 @@ export function ChatPanel({
     {
       heading: 'Book an appointment',
       message: `Want to book an appointment?`,
-      src:"/icons/book-an-appointment.png"
+      src: "/icons/book-an-appointment.png"
     },
     {
       heading: 'Cancel or reschedule',
       message: `Want to cancel or reschedule the appointment?`,
-      src:"/icons/cancel-or-reschedule-appointment.png"
+      src: "/icons/cancel-or-reschedule-appointment.png"
     },
     {
       heading: 'Hair diagnose',
       message: `What is the current status of your hair?`,
-      src:"/icons/hair-diagnose.png"
+      src: "/icons/hair-diagnose.png"
     },
     {
       heading: 'Hairstyle consultation',
       message: `Which haitsryle are you looking for?`,
-      src:"/icons/hair-style-consultation.png"
+      src: "/icons/hair-style-consultation.png"
     },
     {
       heading: 'Follow up treatment advice',
       message: `Do you need further help with your past service?`,
-      src:"/icons/follow-up-treatment-advice.png"
+      src: "/icons/follow-up-treatment-advice.png"
     },
     {
       heading: 'Give us feedback',
       message: `Do you have any feedback for us?`,
-      src:"/icons/feedback.png"
+      src: "/icons/feedback.png"
     }
   ];
   return (
@@ -96,19 +96,16 @@ export function ChatPanel({
                   ]);
                 }}
               >
-                  <Image
-                    src= {example.src} // Provide the correct source for the image
-                    alt="book-an-appointment"
-                    width={60}
-                    height={60}
-                  />
-           
+                <Image
+                  src={example.src} // Provide the correct source for the image
+                  alt="book-an-appointment"
+                  width={60}
+                  height={60}
+                />
+
                 {/* Text */}
                 <div className="line-clamp-3 max-w-full text-balance text-gray-600 dark:text-gray-500 break-word text-center">
                   {example.heading}
-                </div>
-                <div className="text-sm text-zinc-600 text-center">
-                  {example.message}
                 </div>
               </div>
             ))}
