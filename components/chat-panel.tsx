@@ -19,6 +19,7 @@ export interface ChatPanelProps {
   setInput: (value: string) => void;
   isAtBottom: boolean;
   scrollToBottom: () => void;
+  currentMessages: any;
 }
 
 export function ChatPanel({
@@ -107,6 +108,7 @@ export function ChatPanel({
                 <div className="line-clamp-3 max-w-full text-balance text-gray-600 dark:text-gray-500 break-word text-center">
                   {example.heading}
                 </div>
+
               </div>
             ))}
         </div>
