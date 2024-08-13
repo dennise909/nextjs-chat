@@ -73,13 +73,13 @@ export function ChatPanel({
         scrollToBottom={scrollToBottom}
       />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
-        <div className="mx-3 mt-12 flex max-w-3xl flex-wrap items-stretch justify-center gap-4 p-10">
+        <div className="mb-4 grid grid-cols-2 gap-2 px-4 sm:px-0">
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
                 key={example.heading}
                 className="flex flex-col items-center justify-between w-40 gap-2 rounded-2xl border border-token-border-light p-4 text-start text-[15px] shadow-xxs transition hover:bg-gray-200 cursor-pointer"
-                  
+
                 onClick={async () => {
                   setMessages(currentMessages => [
                     ...currentMessages,
