@@ -19,7 +19,6 @@ export interface ChatPanelProps {
   setInput: (value: string) => void;
   isAtBottom: boolean;
   scrollToBottom: () => void;
-  currentMessages: any;
 }
 
 export function ChatPanel({
@@ -80,18 +79,19 @@ export function ChatPanel({
               <div
                 key={example.heading}
                 className="flex flex-col items-center justify-between w-40 gap-2 rounded-2xl border border-token-border-light p-4 text-start text-[15px] shadow-xxs transition hover:bg-gray-200 cursor-pointer"
+                  
                 onClick={async () => {
-                  setMessages((currentMessages) => [
+                  setMessages(currentMessages => [
                     ...currentMessages,
                     {
                       id: nanoid(),
-                      display: <UserMessage>{example.message}</UserMessage>,
-                    },
+                      display: <UserMessage>{example.message}</UserMessage>
+                    }
                   ]);
 
                   const responseMessage = await submitUserMessage(example.message);
 
-                  setMessages((currentMessages) => [
+                  setMessages(currentMessages => [
                     ...currentMessages,
                     responseMessage,
                   ]);
