@@ -26,7 +26,86 @@ import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
-import listAvailableSlots from '@/components/calendar/GoogleCalendarFreeBusy';
+// import listAvailableSlots from '@/components/calendar/GoogleCalendarFreeBusy';
+
+const listAvailableSlots = [
+  {
+    "start": "2024-09-08T09:09:09.877Z",
+    "end": "2024-09-08T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-08T14:00:00.000Z",
+    "end": "2024-09-09T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-09T06:30:00.000Z",
+    "end": "2024-09-09T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-09T14:00:00.000Z",
+    "end": "2024-09-10T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-10T06:30:00.000Z",
+    "end": "2024-09-10T10:00:00.000Z"
+  },
+  {
+    "start": "2024-09-10T10:30:00.000Z",
+    "end": "2024-09-10T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-10T13:00:00.000Z",
+    "end": "2024-09-10T15:30:00.000Z"
+  },
+  {
+    "start": "2024-09-10T18:45:00.000Z",
+    "end": "2024-09-11T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-11T06:30:00.000Z",
+    "end": "2024-09-11T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-11T13:00:00.000Z",
+    "end": "2024-09-12T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-12T06:30:00.000Z",
+    "end": "2024-09-12T10:00:00.000Z"
+  },
+  {
+    "start": "2024-09-12T11:00:00.000Z",
+    "end": "2024-09-12T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-12T17:00:00.000Z",
+    "end": "2024-09-13T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-13T06:30:00.000Z",
+    "end": "2024-09-13T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-13T13:00:00.000Z",
+    "end": "2024-09-14T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-14T06:30:00.000Z",
+    "end": "2024-09-14T12:00:00.000Z"
+  },
+  {
+    "start": "2024-09-14T13:00:00.000Z",
+    "end": "2024-09-15T04:30:00.000Z"
+  },
+  {
+    "start": "2024-09-15T06:30:00.000Z",
+    "end": "2024-09-15T08:00:00.000Z"
+  },
+  {
+    "start": "2024-09-15T09:00:00.000Z",
+    "end": "2024-09-15T09:09:09.877Z"
+  }
+]
 
 const services = {
   "categories": {
@@ -226,7 +305,7 @@ async function submitUserMessage(content: string) {
         You are a helpful receptionist at a hairsalon bot designed to assist users in scheduling appointments 
         and providing information about various hairdressing services. 
         Below is a list of services you offer in JSON format. 
-        Use this information to respond to users' questions and help them schedule appointments.
+        Use this information to respond to users questions and help them schedule appointments.
         Services: ${JSON.stringify(services, null, 2)}
         When responding to users, refer to the services mentioned above and provide detailed information based on their questions. 
         Assist them in scheduling appointments and offer suggestions tailored to their needs.
@@ -234,6 +313,8 @@ async function submitUserMessage(content: string) {
         Present only the start times as options and ask users the day they would like to book and if they prefer morning, afternoon, or evening slots. 
         Ensure the offered times fall within the show times of 10:00 AM to 7:00 PM.
         Avaialble Hours: ${listAvailableSlots}
+        After they have selected the hours ask for their name, email address and phone number to confirm the booking.
+        Confirm the booking by providing the user with the details of the appointment and give the confirmation number QC12345.
         `
       },
       ...aiState.get().messages.map((message: any) => ({
@@ -291,6 +372,8 @@ export type UIState = {
   id: string
   display: React.ReactNode
 }[]
+
+
 
 export const AI = createAI<AIState, UIState>({
   actions: {

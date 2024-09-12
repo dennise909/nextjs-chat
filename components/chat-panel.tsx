@@ -73,13 +73,14 @@ export function ChatPanel({
         scrollToBottom={scrollToBottom}
       />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
-        <div className="mb-4 grid grid-cols-2 gap-2 px-4 sm:px-0">
+        <div className="flex flex-row flex-wrap sm:justify-center sm:gap-2 pb-2">
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
                 key={example.heading}
-                className="flex flex-col items-center justify-between w-40 gap-2 rounded-2xl border border-token-border-light p-4 text-start text-[15px] shadow-xxs transition hover:bg-gray-200 cursor-pointer"
-
+                className="flex flex-col w-1/2 h:40 gap-1 p-2 text-sm items-center justify-center sm:w-40 sm:h-35 sm:gap-2 sm:p-3 rounded-2xl border border-token-border-light p-4 text-start text-[15px] shadow-xxs transition hover:bg-gray-200 cursor-pointer ${
+                  index > 1 && 'hidden md:block'
+                }`}"
                 onClick={async () => {
                   setMessages(currentMessages => [
                     ...currentMessages,
@@ -99,18 +100,21 @@ export function ChatPanel({
               >
                 <Image
                   src={example.src} // Provide the correct source for the image
-                  alt="book-an-appointment"
+                  alt={example.heading}
                   width={60}
                   height={60}
+                  className='w-10 sm:w-15'
                 />
 
                 {/* Text */}
-                <div className="line-clamp-3 max-w-full text-balance text-gray-600 dark:text-gray-500 break-word text-center">
+                <div className="line-clamp-5 sm:max-w-40 text-balance text-gray-600 dark:text-gray-500 break-word text-center">
                   {example.heading}
                 </div>
 
               </div>
+
             ))}
+
         </div>
 
         {messages?.length >= 2 ? (

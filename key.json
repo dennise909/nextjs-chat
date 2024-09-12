@@ -1,0 +1,15 @@
+{
+    "web": {
+        "client_id": "911452289802-r37kaflvcvkvm9mrhehataqmka7hlnti.apps.googleusercontent.com",
+        "project_id": "nerea-430312",
+        "private_key": "d4e163270f0edda0bdf60d5969eb8fcaa365bdea",
+        "client_email": "daniela@nerea-430312.iam.gserviceaccount.com",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "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",
+        "javascript_origins": [
+            "http://localhost:3000"
+        ]
+    }
+}

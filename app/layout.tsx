@@ -13,10 +13,10 @@ export const metadata = {
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'Next.js AI Chatbot',
+    default: 'CBI',
     template: `%s - Next.js AI Chatbot`
   },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
+  description: 'A Conversational Booking Interface for booking appointments.',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -53,7 +53,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <Header />
             <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
           </div>
           <TailwindIndicator />
