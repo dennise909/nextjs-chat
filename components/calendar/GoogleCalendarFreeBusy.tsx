@@ -159,7 +159,7 @@ const GoogleCalendar = () => {
   };
 
   return (
-    <div>
+    <>
       {!session ? (
         <button onClick={() => signIn('google')}>Sign in with Google</button>
       ) : (
@@ -175,7 +175,7 @@ const GoogleCalendar = () => {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
