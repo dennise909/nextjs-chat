@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export default NextAuth({
+export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -33,10 +33,15 @@ export default NextAuth({
   },
 
   // Configure options such as pages (if you want custom login pages, etc.)
-  pages: {
-    signIn: '/auth/signin', // You can create a custom sign-in page here if desired
-  },
+  // pages: {
+  //   signIn: '/auth/signin', // You can create a custom sign-in page here if desired
+  // },
 
   // You can also enable debugging if necessary
   debug: process.env.NODE_ENV === 'development',
-});
+};
+
+// Create a handler using NextAuth
+const handler = NextAuth(authOptions);
+// Explicitly export handlers for each HTTP method
+export { handler as GET, handler as POST };
